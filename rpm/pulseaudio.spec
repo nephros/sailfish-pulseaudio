@@ -145,6 +145,9 @@ install -m 644 %{SOURCE5} %{buildroot}/%{_unitdir}/pulseaudio.service
 mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 README %{buildroot}%{_docdir}/%{name}-%{version}
 
+install -d %{buildroot}/opt/pulse-%{pulseversion}/modules/
+mv %{buildroot}%{_libdir}/pulse-%{pulseversion}/modules/libbluez5-util.so %{buildroot}/opt/pulse-%{pulseversion}/modules/libbluez5-util.so
+
 %find_lang pulseaudio
 
 %fdupes  %{buildroot}/%{_datadir}
@@ -325,5 +328,5 @@ usermod -G pulse-access -a root || :
 
 %if %{with gstreamer}
 %files gst-bt
-%{_libdir}/pulse-%{pulseversion}/modules/libbluez5-util.so
+/opt/pulse-%{pulseversion}/modules/libbluez5-util.so
 %endif
