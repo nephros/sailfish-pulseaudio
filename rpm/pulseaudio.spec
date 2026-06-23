@@ -48,10 +48,6 @@ BuildRequires:  libtool >= 2.4
 BuildRequires:  libtool-ltdl-devel
 BuildRequires:  fdupes
 
-%if %{with gstreamer}
-Prefix: /opt/pulse-%{pulseversion}
-%endif
-
 %description
 PulseAudio is a layer between audio devices and applications. It removes
 the need for applications to care about the details of the hardware.
