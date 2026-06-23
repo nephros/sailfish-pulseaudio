@@ -1,3 +1,5 @@
+%bcond_with gstreamer
+
 Name:       pulseaudio
 
 %define pulseversion 17.0
@@ -36,8 +38,10 @@ BuildRequires:  pkgconfig(atomic_ops)
 BuildRequires:  pkgconfig(sbc) >= 1.0
 BuildRequires:  pkgconfig(systemd)
 BuildRequires:  pkgconfig(bluez) >= 5.0
+%if %{with gstreamer}
 BuildRequires:  pkgconfig(gstreamer-1.0) >= 1.14
 BuildRequires:  pkgconfig(gstreamer-app-1.0) >= 1.14
+%endif
 BuildRequires:  gettext
 BuildRequires:  libcap-devel
 BuildRequires:  libtool >= 2.4
@@ -73,6 +77,14 @@ Requires:  %{name} = %{version}-%{release}
 
 %description doc
 Man pages for %{name}.
+
+%package gst-bt
+Summary:   GStreamer-backed bluetooth support for %{name}
+#Requires:  %%{name} = %%{version}-%%{release}
+
+%description gst-bt
+Streamer-backed bluetooth support for %{name}
+
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -135,6 +147,12 @@ install -m0644 README %{buildroot}%{_docdir}/%{name}-%{version}
 
 # Stray X11 manpage
 rm %{buildroot}%{_mandir}/man1/start-pulseaudio-x11.1
+
+%if %{with gstreamer}
+%clean
+# remove all the other files
+find ~/rpmbuild/RPMS -type f -name '*.rpm' | grep -v gst-bt | xargs rm -f
+%endif
 
 %pre
 getent group pulse-access >/dev/null || groupadd -r pulse-access
@@ -299,3 +317,8 @@ usermod -G pulse-access -a root || :
 %{_mandir}/man1/p*
 %{_mandir}/man5/*.*
 %{_docdir}/%{name}-%{version}
+
+%if %{with gstreamer}
+%files gst-bt
+%{_libdir}/pulse-%{pulseversion}/modules/libbluez5-util.so
+%endif
