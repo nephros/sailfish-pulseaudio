@@ -146,7 +146,7 @@ mkdir -p %{buildroot}%{_docdir}/%{name}-%{version}
 install -m0644 README %{buildroot}%{_docdir}/%{name}-%{version}
 
 install -d %{buildroot}/opt/pulse-%{pulseversion}/modules/
-mv %{buildroot}%{_libdir}/pulse-%{pulseversion}/modules/libbluez5-util.so %{buildroot}/opt/pulse-%{pulseversion}/modules/libbluez5-util.so
+cp %{buildroot}%{_libdir}/pulse-%{pulseversion}/modules/libbluez5-util.so %{buildroot}/opt/pulse-%{pulseversion}/modules/libbluez5-util.so
 
 %find_lang pulseaudio
 
