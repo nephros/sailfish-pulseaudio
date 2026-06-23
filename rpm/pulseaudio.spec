@@ -87,6 +87,9 @@ Summary:   GStreamer-backed bluetooth support for %{name}
 #Requires:  %%{name} = %%{version}-%%{release}
 Requires:  %{name} >= %{pulseversion}
 Requires:  %{name} < 17.1
+# specifically collide with attahs release:
+Conflicts: %{name} = 17.0+test1-1
+Obsoletes: %{name} = 17.0+test1-1
 
 %description gst-bt
 Streamer-backed bluetooth support for %{name}
