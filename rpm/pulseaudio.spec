@@ -81,7 +81,7 @@ Man pages for %{name}.
 %package gst-bt
 Summary:   GStreamer-backed bluetooth support for %{name}
 #Requires:  %%{name} = %%{version}-%%{release}
-Requires:  %{name} >= 17.0+git1
+Requires:  %{name} >= %{pulseversion}
 Requires:  %{name} < 17.1
 
 %description gst-bt
