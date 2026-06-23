@@ -19,7 +19,7 @@ Requires:   udev
 Requires:   libsbc >= 1.0
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
-# system-wide mode %pre
+# system-wide mode %%pre
 Requires(pre): /usr/bin/getent
 Requires(pre): /usr/sbin/groupadd
 Requires(pre): /usr/sbin/useradd
